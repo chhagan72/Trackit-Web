@@ -1,0 +1,73 @@
+<!-- profile.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Device Profile</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+  <style>
+    body {
+      background: #f9f9f9;
+    }
+    .profile-card {
+      animation: fadeIn 1s ease-in-out;
+      border-radius: 15px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .profile-pic {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      object-fit: cover;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+      margin-bottom: 15px;
+    }
+    .bi-person-circle {
+      font-size: 120px;
+      color: #6c757d;
+      margin-bottom: 15px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container mt-5">
+    <div id="loader" class="text-center my-5">
+        <div class="spinner-border text-primary" role="status"></div>
+    </div>
+    <script>
+        window.addEventListener('load', () => {
+          document.getElementById('loader').style.display = 'none';
+        });
+    </script>
+
+    {% if device %}
+    <div class="profile-card bg-white p-4 text-center">
+      {% if device.profile_pic_url %}
+        <img src="{{ device.profile_pic_url }}" alt="Profile Picture" class="profile-pic">
+      {% else %}
+        <i class="bi bi-person-circle"></i>
+      {% endif %}
+
+      <h3>{{ device.name }}</h3>
+      <p class="text-muted">{{ device.email }}</p>
+      <p><strong>Phone:</strong> {{ device.mobile|default:"N/A" }}</p>
+      <p><strong>DOB:</strong> {{ device.dob }}</p>
+      <a href="/devices/" class="btn btn-outline-primary mt-3">← Back to Device List</a>
+    </div>
+    {% else %}
+    <div class="alert alert-danger text-center">
+        Profile not found for this device.
+    </div>
+    {% endif %}
+  </div>
+</body>
+</html>
+
+
+
+
