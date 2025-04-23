@@ -105,3 +105,34 @@ function initMap(lat = 0, lng = 0) {
 window.onload = function () {
   refreshDeviceDetails();
 };
+
+
+
+
+
+
+    
+    // function initMap(lat = 0, lng = 0) {
+    //   if (isMapInitialized) return;
+
+    //   map = L.map('map').setView([lat, lng], 16);
+    //   isMapInitialized = true;
+
+    //   L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    //     attribution: 'Map data © OpenStreetMap contributors',
+    //   }).addTo(map);
+
+    //   // deviceMarker = L.marker([18.5204, 73.8567]).addTo(map)
+    //   //   .bindPopup("📍 Waiting for your location...").openPopup();
+
+
+    //   deviceMarker = L.marker([lat, lng], { title: "Device Location" }).addTo(map);
+    //   userMarker = L.marker([lat, lng], { title: "Your Location", opacity: 0.8 }).addTo(map);
+    // }
+
+
+
+
+
+
+
