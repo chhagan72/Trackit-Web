@@ -19,14 +19,28 @@ body {
   display: flex;
   height: calc(100vh - 56px);
   margin-top: 56px;
+  overflow: hidden;
 }
 
 .sidebar {
-  width: 300px;
+  width: 270px;
   background: #fff;
   padding: 20px;
   overflow-y: auto;
   box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease-in-out;
+}
+
+.sidebar.hide {
+  transform: translateX(-100%);
+  position: fixed;
+  top: 56px;
+  left: 0;
+  height: calc(100vh - 56px);
+  z-index: 1050;
+  width: 50%;
+  max-width: 300px;
+  background: #fff;
 }
 
 .map-container {
@@ -38,15 +52,10 @@ body {
   display: block;
   width: 100%;
   margin-top: 10px;
-  padding: 10px;
+  padding: 7px;
   border-radius: 5px;
 }
 
-/* 
-    #map {
-      width: 100%;
-      height: 100%;
-    } */
 #map {
   height: 100%;
   width: 100%;
@@ -55,6 +64,7 @@ body {
 }
 
 .phoneDetails {
+  padding: 10px;
   font-size: 14px;
   line-height: 5px;
 }
@@ -67,9 +77,8 @@ body {
   position: absolute;
   bottom: 0;
   right: 0;
-  margin: 8px;
+  margin: 5px;
 }
-
 
 #distanceInfo {
   display: none;
@@ -82,10 +91,23 @@ body {
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
   z-index: 999;
   font-size: 14px;
+}
 
-  /* margin-bottom: 10px;
-  padding: 10px;
-  background: #f0f0f0;
-  border: 1px solid #ccc;
-  display: none */
+/* Responsive styles */
+@media (max-width: 1024px) {
+  .sidebar {
+    transform: translateX(-100%);
+    position: fixed;
+    top: 56px;
+    left: 0;
+    height: calc(100vh - 56px);
+    z-index: 1050;
+    width: 50%;
+    max-width: 300px;
+    background: #fff;
+  }
+
+  .sidebar.show {
+    transform: translateX(0);
+  }
 }
