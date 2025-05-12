@@ -22,7 +22,7 @@ RUN pip install --upgrade pip && pip install -r requirements.txt
 COPY . .
 
 # Collect static files
-RUN python manage.py collectstatic --noinput || true
+# RUN python manage.py collectstatic --noinput || true
 
 # Run migrations
 RUN python manage.py migrate || true
@@ -31,5 +31,6 @@ RUN python manage.py migrate || true
 EXPOSE 8000
 
 # Start Gunicorn
-CMD ["gunicorn", "trackit.wsgi:application", "--bind", "0.0.0.0:8000"]
+# CMD ["gunicorn", "trackit.wsgi:application", "--bind", "0.0.0.0:8000"]
+CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
 
