@@ -14,23 +14,17 @@ RUN apt-get update && apt-get install -y \
     libpq-dev \
     && apt-get clean
 
-# Copy requirements and install
+# Copy dependency file
 COPY requirements.txt .
+
+# Install Python dependencies
 RUN pip install --upgrade pip && pip install -r requirements.txt
 
-# Copy project files
+# Copy all project files
 COPY . .
-
-# Collect static files
-# RUN python manage.py collectstatic --noinput || true
-
-# Run migrations
-RUN python manage.py migrate || true
 
 # Expose port
 EXPOSE 8000
 
-# Start Gunicorn
-# CMD ["gunicorn", "trackit.wsgi:application", "--bind", "0.0.0.0:8000"]
+# Start the Django development server
 CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
-
