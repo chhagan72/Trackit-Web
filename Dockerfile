@@ -8,15 +8,28 @@ ENV PYTHONUNBUFFERED 1
 # Set working directory
 WORKDIR /app
 
-# Install dependencies
+# Install system dependencies
+RUN apt-get update && apt-get install -y \
+    build-essential \
+    libpq-dev \
+    && apt-get clean
+
+# Copy requirements and install
 COPY requirements.txt .
 RUN pip install --upgrade pip && pip install -r requirements.txt
 
 # Copy project files
 COPY . .
 
+# Collect static files
+RUN python manage.py collectstatic --noinput || true
+
+# Run migrations
+RUN python manage.py migrate || true
+
 # Expose port
 EXPOSE 8000
 
-# Run server
-CMD ["gunicorn", "yourproject.wsgi:application", "--bind", "0.0.0.0:8000"]
+# Start Gunicorn
+CMD ["gunicorn", "trackit.wsgi:application", "--bind", "0.0.0.0:8000"]
+
